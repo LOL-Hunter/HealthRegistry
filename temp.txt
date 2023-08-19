@@ -1,0 +1,75 @@
+{
+    "name": "Weizen",
+    "nor_portion": "2 St.",
+    "small_portion": "1 St.",
+    "chds": [
+        "Oligos"
+    ],
+    "test_data": {
+        "tested": false,
+        "first_test_day": "",
+        "test_level": 0,
+        "result": null,
+        "notes": []
+    }
+},
+{
+    "name": "Roggen",
+    "nor_portion": "2 St.",
+    "small_portion": "1 St.",
+    "chds": [
+        "Oligos"
+    ],
+    "test_data": {
+        "tested": false,
+        "first_test_day": "",
+        "test_level": 0,
+        "result": null,
+        "notes": []
+    }
+},
+{
+    "name": "Gerste",
+    "nor_portion": "1 Tasse",
+    "small_portion": "1/2 Tasse",
+    "chds": [
+        "Oligos"
+    ],
+    "test_data": {
+        "tested": false,
+        "first_test_day": "",
+        "test_level": 0,
+        "result": null,
+        "notes": []
+    }
+},
+{
+    "name": "Artischocke",
+    "nor_portion": "1/2 St.",
+    "small_portion": "1/4 St.",
+    "chds": [
+        "Oligos"
+    ],
+    "test_data": {
+        "tested": false,
+        "first_test_day": "",
+        "test_level": 0,
+        "result": null,
+        "notes": []
+    }
+},
+{
+    "name": "Artischocken-Hertz",
+    "nor_portion": "1/4 St.",
+    "small_portion": "1/8 St.",
+    "chds": [
+        "Oligos"
+    ],
+    "test_data": {
+        "tested": false,
+        "first_test_day": "",
+        "test_level": 0,
+        "result": null,
+        "notes": []
+    }
+},
