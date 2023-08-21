@@ -1,4 +1,4 @@
-from backend import DataLoader, FoodTableDataSource
+from backend import DataLoader, FoodTableDataSource, WidgetConfigurator
 import ui
 
 class GUI:
@@ -25,6 +25,9 @@ class GUI:
         close.action = self.close
         self.mainView.left_button_items = [close]
 
+        text = self.propView["prop_text_view"]
+        WidgetConfigurator.configTextView(text)
+
 
 
        #prop = self.foodData.getProperties(selected)
@@ -32,11 +35,10 @@ class GUI:
        #self.textT.setText(prop)
         # textview.text = prop
 
-    def onListBoxSelect(self, dataSource):
-        index = dataSource.selected_row
-        food = GUI.CURRENT_FOOD_TABLE_DATA_SRC.food[index]
-        prop = self.foodData.getPropertiesByData(food)
-
+    def onListBoxSelect(self, fdata:dict):
+        prop = self.foodData.getPropertiesByData(fdata)
+        text = self.propView["prop_text_view"]
+        text.text = prop
 
         GUI.GUI_INS.navView.push_view(GUI.GUI_INS.propView)
 
