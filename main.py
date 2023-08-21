@@ -142,10 +142,10 @@ class GUI:
 
     def onOK(self, e):
         def inner():
-            out = alert("Warning", "Bist du sicher, dass du den Test mit 'OK' beenden moechtest?", "Ok", "Cancel")
+            out = alert("Warning", "Bist du sicher, dass du den Test mit 'OK' beenden moechtest?", "Ok", "Cancel", hide_cancel_button=True)
             if out == 2: return
             if len(self.activeFood["test_data"]["test_days"]) < 3:
-                out = alert("Warning", "Achtung! Es wurden nicht alle Tage eingetragen.\nBist du Sicher?", "Ok", "Cancel")
+                out = alert("Warning", "Achtung! Es wurden nicht alle Tage eingetragen.\nBist du Sicher?", "Ok", "Cancel", hide_cancel_button=True)
                 if out == 2: return
             self.activeFood["test_data"]["tested"] = True
             self.activeFood["test_data"]["result"] = True
@@ -157,10 +157,10 @@ class GUI:
 
     def onNOK(self, e):
         def inner():
-            out = alert("Warning", "Bist du sicher, dass du den Test mit 'NICHT OK' beenden moechtest?", "Ok", "Cancel")
+            out = alert("Warning", "Bist du sicher, dass du den Test mit 'NICHT OK' beenden moechtest?", "Ok", "Cancel", hide_cancel_button=True)
             if out == 2: return
             if len(self.activeFood["test_data"]["test_days"]) < 3:
-                out = alert("Warning", "Achtung! Es wurden nicht alle Tage eingetragen.\nBist du Sicher?", "Ok", "Cancel")
+                out = alert("Warning", "Achtung! Es wurden nicht alle Tage eingetragen.\nBist du Sicher?", "Ok", "Cancel", hide_cancel_button=True)
                 if out == 2: return
             self.activeFood["test_data"]["tested"] = True
             self.activeFood["test_data"]["result"] = False
