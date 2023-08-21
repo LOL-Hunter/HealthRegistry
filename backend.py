@@ -105,18 +105,13 @@ class DataLoader:
     def getInfo(self):
         tested = 0
         untested = 0
-        active = self.getActiveFood()["name"] if self.getActiveFood()["name"] is not None else "No Food Active!"
+        active = self.getActiveFood()["name"] if self.getActiveFood() is not None else "Kein Nahrungsmittel activ!"
         length = len(self.getFoods())
         for food in self.getFoods():
             testData = food["test_data"]
             if testData["tested"]: tested += 1
             else: untested += 1
-        return f"Total: {length}\nTested: {tested}\nUntested: {untested}\nActive: {active}"
-
-
-
-
-
+        return f"Total: {length}\nGetestet: {tested}\nNicht Getestet: {untested}\nActiv: {active}"
 
     def save(self):
         self.js.save()
@@ -152,18 +147,43 @@ class FoodTableDataSource:
         cell.text_label.text = self.food[row]["name"]
         return cell
 
+class DayTableDataSource:
+    def __init__(self, _ins, food):
+        self.ins = _ins
+        self.food = food
+
+    def tableview_number_of_sections(self, tableview):
+        return 1
+    def tableview_number_of_rows(self, tableview, section):
+        return 3
+
+    def tableview_did_select(self, tableview, section, row):
+        self.ins.onDayBoxSelect(row)
+
+    def tableview_cell_for_row(self, tableview, section, row):
+        info = ""
+        days = self.food["test_data"]["test_days"]
+        length = len(days)
+        if length >= row+1:
+            info = f'{days[row]}'
+        cell = ui.TableViewCell()
+        cell.text_label.text = f'Day {row+1} '+info
+        return cell
+
+
+
 class TextViewDelegate:
     def __init__(self, hook):
         self.hook = hook
-    def textview_should_begin_editing(self, textview):
+    def textfield_should_begin_editing(self, textview):
         return True
-    def textview_did_begin_editing(self, textview):
+    def textfield_did_begin_editing(self, textview):
         pass
-    def textview_did_end_editing(self, textview):
+    def textfield_did_end_editing(self, textview):
         pass
-    def textview_should_change(self, textview, range, replacement):
+    def textfield_should_change(self, textview, range, replacement):
         return True
-    def textview_did_change(self, textview):
+    def textfield_did_change(self, textview):
         self.hook(textview)
-    def textview_did_change_selection(self, textview):
+    def textfield_did_change_selection(self, textview):
         pass
