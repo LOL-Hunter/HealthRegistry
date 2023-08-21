@@ -10,9 +10,11 @@ class GUI:
         GUI.GUI_INS = self
         self.selectedMode = "All"
         self.selectedFood = None
+        self.activeFood = None
         self.searchWord = ""
         self.selectedDay = 0
         self.foodData = DataLoader()
+        self.activeFood =  self.foodData.getActiveFood()
         self.loadView()
         self.fillListbox(self.foodData.getFoods())
         self.updateInfo()
@@ -82,20 +84,21 @@ class GUI:
         if self.selectedFood["test_data"]["tested"]:
             hud_alert("Lebensmittel bereits getestet!")
             return
-        self.foodData.setFoodActive(self.selectedFood["name"])
+        self.activeFood = self.selectedFood
+        self.foodData.setFoodActive(self.activeFood["name"])
         self.foodData.save()
-        hud_alert(f"Nahrungsmittel '{self.selectedFood['name']}' gestartet!")
+        hud_alert(f"Nahrungsmittel '{self.activeFood['name']}' gestartet!")
         self.navView.pop_view(True)
 
     def onDayBoxSelect(self, dayIndex):
         self.selectedDay = dayIndex
-        days = self.selectedFood["test_data"]["test_days"]
+        days = self.activeFood["test_data"]["test_days"]
         if len(days) >= dayIndex-1:
             hud_alert("Bitte erst die voherigen Tage eintragen!")
             return
         if len(days) >= dayIndex+1: # day already exixts -> not create new on
             date = days[dayIndex]
-            notices = self.selectedFood["test_data"]["notices"]
+            notices = self.activeFood["test_data"]["notices"]
             noticesTextView = self.editDView["notices_textview"]
             noticesTextView.text = notices[date]
 
@@ -110,7 +113,7 @@ class GUI:
     def onSaveDay(self, e):
         # check if date already exists
         # take date and create notice
-        days = self.selectedFood["test_data"]["test_days"]
+        days = self.activeFood["test_data"]["test_days"]
         datePicker = self.editDView["date_picker"]
         date:datetime = datePicker.date
         str_date = f'{0+date.day if len(str(date.day))==1 else date.day}.{0+date.month if len(str(date.month))==1 else date.month}.{date.year}'
@@ -119,7 +122,7 @@ class GUI:
         else:
             days.append(str_date)
         noticesTextView = self.editDView["notices_textview"]
-        self.selectedFood["test_data"]["notices"][str_date] = noticesTextView.text
+        self.activeFood["test_data"]["notices"][str_date] = noticesTextView.text
         self.foodData.save()
         self.updateInfo()
         self.navView.pop_view(True)
@@ -128,20 +131,20 @@ class GUI:
     def onOK(self, e):
         out = alert("Warning", "Bist du sicher, dass du den Test mit 'OK' beenden moechtest?", "Ok", "Cancel")
         if out == 2: return
-        self.selectedFood["test_data"]["tested"] = True
-        self.selectedFood["test_data"]["result"] = True
+        self.activeFood["test_data"]["tested"] = True
+        self.activeFood["test_data"]["result"] = True
         self.foodData.setFoodActive(None)
-        self.selectedFood = None
+        self.activeFood = None
         self.foodData.save()
         self.updateInfo()
 
     def onNOK(self, e):
         out = alert("Warning", "Bist du sicher, dass du den Test mit 'NICHT OK' beenden moechtest?", "Ok", "Cancel")
         if out == 2: return
-        self.selectedFood["test_data"]["tested"] = True
-        self.selectedFood["test_data"]["result"] = False
+        self.activeFood["test_data"]["tested"] = True
+        self.activeFood["test_data"]["result"] = False
         self.foodData.setFoodActive(None)
-        self.selectedFood = None
+        self.activeFood = None
         self.foodData.save()
         self.updateInfo()
 
@@ -154,6 +157,8 @@ class GUI:
         prop = self.foodData.getPropertiesByData(fdata)
         text = self.propView["prop_text_view"]
         text.text = prop
+        text = self.daySView["info_text_view"]
+        text.text = self.foodData.getInfo()
 
         self.navView.push_view(self.propView)
 
@@ -182,8 +187,6 @@ class GUI:
 
     def updateInfo(self):
         text = self.mainView["info_text_view"]
-        text.text = self.foodData.getInfo()
-        text = self.daySView["info_text_view"]
         text.text = self.foodData.getInfo()
 
 
