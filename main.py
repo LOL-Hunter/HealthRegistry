@@ -69,6 +69,7 @@ class GUI:
     def clearSearch(self, e):
         search_field = self.mainView["search_field"]
         search_field.text = ""
+        self.searchWord = ""
         self.updateListbox()
 
     def showActiveTest(self, e):
@@ -136,8 +137,14 @@ class GUI:
         self.activeFood["test_data"]["notes"][str_date] = noticesTextView.text
         self.foodData.save()
         self.updateInfo()
+        day_list = self.daySView["days_tableview"]
+        dataSource = DayTableDataSource(self, self.foodData.getActiveFood())
+        day_list.data_source = dataSource
+        day_list.delegate = dataSource
+        day_list.reload_data()
+        text = self.daySView["info_text_view"]
+        text.text = self.foodData.getPropertiesByData(self.activeFood)
         self.navView.navigation_bar_hidden = False
-        self.navView.pop_view(True)
         self.navView.pop_view(True)
 
     def onOK(self, e):
@@ -153,6 +160,7 @@ class GUI:
             self.activeFood = None
             self.foodData.save()
             self.updateInfo()
+            self.updateListbox()
             self.navView.pop_view(True)
         Thread(target=inner).start()
 
@@ -169,6 +177,7 @@ class GUI:
             self.activeFood = None
             self.foodData.save()
             self.updateInfo()
+            self.updateListbox()
             self.navView.pop_view(True)
         Thread(target=inner).start()
 
