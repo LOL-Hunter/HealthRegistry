@@ -14,6 +14,22 @@ class DataLoader:
     def getFoods(self)->[]:
         return self.js["food"]
 
+    def getTestedFoods(self)->[]:
+        l = []
+        for food in self.getFoods():
+            testData = food["test_data"]
+            if testData["tested"]:
+                l.append(food)
+        return l
+
+    def getUnTestedFoods(self)->[]:
+        l = []
+        for food in self.getFoods():
+            testData = food["test_data"]
+            if not testData["tested"]:
+                l.append(food)
+        return l
+
     def isFoodActive(self)->bool:
         return self["active"] is not None
 
@@ -45,8 +61,24 @@ class DataLoader:
     def getPropertiesByData(self, food):
         if food is not None:
             test = food["test_data"]
-            return f'Name:{food["name"]}\nTested: {test["tested"]}\nResult: {test["result"]}'
-        return ""
+            return f'Name: {food["name"]}\nTested: {test["tested"]}\nResult: {test["result"]}'
+        return "No properties available!\n\t\t:("
+
+    def getInfo(self):
+        tested = 0
+        untested = 0
+        active = self.getActiveFood()["name"] if self.getActiveFood()["name"] is not None else "No Food Active!"
+        length = len(self.getFoods())
+        for food in self.getFoods():
+            testData = food["test_data"]
+            if testData["tested"]: tested += 1
+            else: untested += 1
+        return f"Tested: {tested}\nUntested: {untested}\n Active:{active}"
+
+
+
+
+
 
     def save(self):
         self.js.save()
@@ -69,8 +101,7 @@ class FoodTableDataSource:
         return len(self.food)
 
     def tableview_did_select(self, tableview, section, row):
-        print(tableview, section, row)
-        self.ins.onListBoxSelect(section)
+        self.ins.onListBoxSelect(self.food[row])
 
     def tableview_cell_for_row(self, tableview, section, row):
         cell = ui.TableViewCell()
