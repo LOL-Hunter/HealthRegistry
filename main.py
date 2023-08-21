@@ -6,6 +6,7 @@ class GUI:
     def __init__(self):
         GUI.GUI_INS = self
         self.selectedMode = "All"
+        self.selectedFood = None
         self.searchWord = ""
         self.foodData = DataLoader()
         self.loadView()
@@ -45,6 +46,9 @@ class GUI:
         show_act_test = self.mainView["show_active_test_button"]
         show_act_test.action = self.showActiveTest
 
+        start_test = self.mainView["start_button"]
+        start_test.action = self.startTest
+
     def clearSearch(self, e):
         search_field = self.mainView["search_field"]
         search_field.text = ""
@@ -53,9 +57,17 @@ class GUI:
     def showActiveTest(self, e):
         if self.foodData.getActiveFood() is None:
             hud_alert("Kein Test Aktiv!")
-            return 
+            return
         self.navView.push_view(self.daySView)
 
+    def startTest(self, e):
+        if self.foodData.getActiveFood() is not None:
+            hud_alert("Anderer Test noch aktiv!")
+            return
+        self.foodData.setFoodActive(self.selectedFood["name"])
+        self.foodData.save()
+        hud_alert(f"Nahrungsmittel '{self.selectedFood['name']}' gestartet!")
+        self.navView.pop_view(True)
 
 
 
@@ -64,6 +76,7 @@ class GUI:
         self.updateListbox()
 
     def onListBoxSelect(self, fdata:dict):
+        self.selectedFood = fdata
         prop = self.foodData.getPropertiesByData(fdata)
         text = self.propView["prop_text_view"]
         text.text = prop
