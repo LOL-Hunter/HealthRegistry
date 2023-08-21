@@ -49,10 +49,10 @@ class DataLoader:
         if food is not None:
             food["test_data"] = {
             "tested": False,
-            "first_test_day": "",
+            "test_days": [],
             "test_level": 0,
             "result": None,
-            "notes": []
+            "notes": {}
         }
     def getProperties(self, name):
         food = self.getFoodByName(name)
@@ -61,8 +61,48 @@ class DataLoader:
     def getPropertiesByData(self, food):
         if food is not None:
             test = food["test_data"]
-            return f'Name: {food["name"]}\nTested: {test["tested"]}\nResult: {test["result"]}'
+            if not test["test_level"]:
+                return "\n".join([
+                    f'== Food Data ==',
+                    f'Name: {food["name"]}',
+                    f'Normale Portion: {food["nor_portion"]}',
+                    f'Kleine Portion: {food["small_portion"]}',
+                    f'Kohlenhydrahte: {food["chds"]}',
+                    f'',
+                    f'== Test Data ==',
+                    f'Keine Testdaten vorhanden!',
+                    f'Tested: {test["tested"]}'
+                    f'Result: {test["result"]}'
+                ])
+            return "\n".join([
+                f'== Food Data ==',
+                f'Name: {food["name"]}',
+                f'Normale Portion: {food["nor_portion"]}',
+                f'Kleine Portion: {food["small_portion"]}',
+                f'Kohlenhydrahte: {food["chds"]}',
+                f'',
+                f'== Test Data ==',
+                f'Test Abgeschlossen: {test["tested"]}'
+                f'Test Abgeschlossen am: {test["test_days"][-1] if len(test["test_days"]) > 0 and test["test_level"] >= 3 else "-"}'
+                f'Test Ergebniss: {test["result"]}'
+                f'',
+                f'== Notizen ==',
+                self.getNotices(food)
+            ])
         return "No properties available!\n\t\t:("
+
+    def getNotices(self, food):
+        testData = food["test_data"]
+        days = testData["test_days"]
+        notes = testData["notes"]
+        out = f''
+        for day in days:
+            out += f'\t* {day}\n'
+            for line in notes[day].splitlines():
+                out += f'\t\t'+line+"\n"
+            if notes[day] == "": out += f'\t\tKeine Notizen vorhanden!\n'
+        return out if out != "" else "Keine Notizen vorhanden!"
+
 
     def getInfo(self):
         tested = 0
@@ -73,7 +113,7 @@ class DataLoader:
             testData = food["test_data"]
             if testData["tested"]: tested += 1
             else: untested += 1
-        return f"Tested: {tested}\nUntested: {untested}\n Active:{active}"
+        return f"Total: {length}\nTested: {tested}\nUntested: {untested}\nActive: {active}"
 
 
 
