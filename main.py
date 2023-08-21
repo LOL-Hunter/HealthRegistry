@@ -1,6 +1,9 @@
 from backend import DataLoader, FoodTableDataSource, WidgetConfigurator, Utilities, TextViewDelegate, DayTableDataSource
 import ui
-from console import hud_alert
+from console import hud_alert, alert
+from datetime import datetime
+
+
 class GUI:
     GUI_INS = None
     def __init__(self):
@@ -51,6 +54,9 @@ class GUI:
         start_test = self.propView["start_button"]
         start_test.action = self.startTest
 
+        save_day = self.editDView["save_button"]
+        save_day.action = self.onSaveDay
+
 
     def clearSearch(self, e):
         search_field = self.mainView["search_field"]
@@ -66,6 +72,7 @@ class GUI:
         day_list.data_source = dataSource
         day_list.delegate = dataSource
         day_list.reload_data()
+
         self.navView.push_view(self.daySView)
 
     def startTest(self, e):
@@ -82,10 +89,61 @@ class GUI:
 
     def onDayBoxSelect(self, dayIndex):
         self.selectedDay = dayIndex
-        
+        days = self.selectedFood["test_data"]["test_days"]
+        if len(days) >= dayIndex-1:
+            hud_alert("Bitte erst die voherigen Tage eintragen!")
+            return
+        if len(days) >= dayIndex+1: # day already exixts -> not create new on
+            date = days[dayIndex]
+            notices = self.selectedFood["test_data"]["notices"]
+            noticesTextView = self.editDView["notices_textview"]
+            noticesTextView.text = notices[date]
 
+            d, m, y = date.split(".")
 
+            datePicker = self.editDView["date_picker"]
+            datePicker.date = datetime(y, m, d)
+        else:
+            pass
         self.navView.push_view(self.editDView)
+
+    def onSaveDay(self, e):
+        # check if date already exists
+        # take date and create notice
+        days = self.selectedFood["test_data"]["test_days"]
+        datePicker = self.editDView["date_picker"]
+        date:datetime = datePicker.date
+        str_date = f'{0+date.day if len(str(date.day))==1 else date.day}.{0+date.month if len(str(date.month))==1 else date.month}.{date.year}'
+        if len(days) >= self.selectedDay + 1:
+            days[self.selectedDay] = str_date
+        else:
+            days.append(str_date)
+        noticesTextView = self.editDView["notices_textview"]
+        self.selectedFood["test_data"]["notices"][str_date] = noticesTextView.text
+        self.foodData.save()
+        self.updateInfo()
+        self.navView.pop_view(True)
+        self.navView.pop_view(True)
+
+    def onOK(self, e):
+        out = alert("Warning", "Bist du sicher, dass du den Test mit 'OK' beenden moechtest?", "Ok", "Cancel")
+        if out == 2: return
+        self.selectedFood["test_data"]["tested"] = True
+        self.selectedFood["test_data"]["result"] = True
+        self.foodData.setFoodActive(None)
+        self.selectedFood = None
+        self.foodData.save()
+        self.updateInfo()
+
+    def onNOK(self, e):
+        out = alert("Warning", "Bist du sicher, dass du den Test mit 'NICHT OK' beenden moechtest?", "Ok", "Cancel")
+        if out == 2: return
+        self.selectedFood["test_data"]["tested"] = True
+        self.selectedFood["test_data"]["result"] = False
+        self.foodData.setFoodActive(None)
+        self.selectedFood = None
+        self.foodData.save()
+        self.updateInfo()
 
     def onSearch(self, w):
         self.searchWord = w.text
@@ -124,6 +182,8 @@ class GUI:
 
     def updateInfo(self):
         text = self.mainView["info_text_view"]
+        text.text = self.foodData.getInfo()
+        text = self.daySView["info_text_view"]
         text.text = self.foodData.getInfo()
 
 
