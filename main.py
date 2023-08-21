@@ -22,8 +22,9 @@ class GUI:
 
         close = ui.ButtonItem()
         close.image = ui.Image.named('ionicons-close-24')
-        close.action = self.navView.close
+        close.action = self.close
         self.mainView.left_button_items = [close]
+
 
 
        #prop = self.foodData.getProperties(selected)
@@ -31,20 +32,23 @@ class GUI:
        #self.textT.setText(prop)
         # textview.text = prop
 
-
-    def fillListbox(self, _input:list):
-        listBox = self.mainView["food_view"]
-        listBox.data_source = GUI.CURRENT_FOOD_TABLE_DATA_SRC = FoodTableDataSource(_input)
-        listBox.reload_data()
-
-class Event:
-    @staticmethod
-    def onListBoxSelect(dataSource):
+    def onListBoxSelect(self, dataSource):
         index = dataSource.selected_row
         food = GUI.CURRENT_FOOD_TABLE_DATA_SRC.food[index]
+        prop = self.foodData.getPropertiesByData(food)
+
+
         GUI.GUI_INS.navView.push_view(GUI.GUI_INS.propView)
 
 
+    def close(self, e):
+        self.navView.close()
+
+    def fillListbox(self, _input:list):
+        listBox = self.mainView["food_view"]
+        listBox.data_source = GUI.CURRENT_FOOD_TABLE_DATA_SRC = FoodTableDataSource(self, _input)
+        listBox.delegate = GUI.CURRENT_FOOD_TABLE_DATA_SRC
+        listBox.reload_data()
 
 
 
