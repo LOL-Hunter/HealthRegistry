@@ -1,16 +1,17 @@
-from backend import DataLoader, FoodTableDataSource, WidgetConfigurator
+from backend import DataLoader, FoodTableDataSource, WidgetConfigurator, Utilities, TextViewDelegate
 import ui
 
 class GUI:
-    CURRENT_FOOD_TABLE_DATA_SRC = None
     GUI_INS = None
     def __init__(self):
         GUI.GUI_INS = self
         self.selectedMode = None
+        self.searchWord = ""
         self.foodData = DataLoader()
         self.loadView()
         self.fillListbox(self.foodData.getFoods())
         #self.mainView.present("full_screen")
+        self.navView.present("full_screen", hide_title_bar=True)
 
     def loadView(self):
         self.mainView = ui.load_view("main")
@@ -19,7 +20,7 @@ class GUI:
         self.navView = ui.NavigationView(self.mainView)
         self.navView.width = 600
         self.navView.height = 400
-        self.navView.present("full_screen", hide_title_bar=True)
+
 
         close = ui.ButtonItem()
         close.image = ui.Image.named('ionicons-close-24')
@@ -33,10 +34,19 @@ class GUI:
         seg = self.mainView["select_view_mode_seg"]
         seg.action = self.onSegChange
 
-       #prop = self.foodData.getProperties(selected)
+        search_field = self.mainView["search_field"]
+        search_field.delegate = TextViewDelegate()
 
-       #self.textT.setText(prop)
-        # textview.text = prop
+        clear_search = self.mainView["search_clear"]
+        clear_search.action = self.clearSearch
+
+    def clearSearch(self):
+        search_field = self.mainView["search_field"]
+        search_field.text = ""
+
+    def onSearch(self, w):
+        self.searchWord = w.text
+        self.updateListbox()
 
     def onListBoxSelect(self, fdata:dict):
         prop = self.foodData.getPropertiesByData(fdata)
@@ -45,28 +55,26 @@ class GUI:
 
         GUI.GUI_INS.navView.push_view(GUI.GUI_INS.propView)
 
-
     def close(self, e):
         self.navView.close()
 
     def onSegChange(self, sender):
         sc = sender.superview['select_view_mode_seg']
-        selected_text = sc.segments[sc.selected_index]
+        self.selectedMode = sc.segments[sc.selected_index]
 
-        if selected_text == "All" and self.selectedMode != "All":
-            self.selectedMode = "All"
-            self.fillListbox(self.foodData.getFoods())
-        elif selected_text == "Untested" and self.selectedMode != "Untested":
-            self.selectedMode = "Untested"
-            self.fillListbox(self.foodData.getUnTestedFoods())
-        elif selected_text == "Tested" and self.selectedMode != "Tested":
-            self.selectedMode = "Tested"
-            self.fillListbox(self.foodData.getTestedFoods())
+    def updateListbox(self):
+        if self.selectedMode == "All" and self.selectedMode != "All":
+            self.fillListbox(Utilities.search(self.foodData.getFoods(), self.searchWord))
+        elif self.selectedMode == "Untested" and self.selectedMode != "Untested":
+            self.fillListbox(Utilities.search(self.foodData.getUnTestedFoods(), self.searchWord))
+        elif self.selectedMode == "Tested" and self.selectedMode != "Tested":
+            self.fillListbox(Utilities.search(self.foodData.getTestedFoods(), self.searchWord))
 
     def fillListbox(self, _input:list):
         listBox = self.mainView["food_view"]
-        listBox.data_source = GUI.CURRENT_FOOD_TABLE_DATA_SRC = FoodTableDataSource(self, _input)
-        listBox.delegate = GUI.CURRENT_FOOD_TABLE_DATA_SRC
+        dataSource = FoodTableDataSource(self, _input)
+        listBox.data_source = dataSource
+        listBox.delegate = dataSource
         listBox.reload_data()
 
     def updateInfo(self):
