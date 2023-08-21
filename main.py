@@ -75,6 +75,9 @@ class GUI:
         day_list.delegate = dataSource
         day_list.reload_data()
 
+        text = self.daySView["info_text_view"]
+        text.text = self.foodData.getPropertiesByData(self.activeFood)
+
         self.navView.push_view(self.daySView)
 
     def startTest(self, e):
@@ -93,19 +96,19 @@ class GUI:
     def onDayBoxSelect(self, dayIndex):
         self.selectedDay = dayIndex
         days = self.activeFood["test_data"]["test_days"]
-        if len(days) >= dayIndex-1:
+        if not len(days) >= dayIndex:
             hud_alert("Bitte erst die voherigen Tage eintragen!")
             return
         if len(days) >= dayIndex+1: # day already exixts -> not create new on
             date = days[dayIndex]
-            notices = self.activeFood["test_data"]["notices"]
+            notices = self.activeFood["test_data"]["notes"]
             noticesTextView = self.editDView["notices_textview"]
             noticesTextView.text = notices[date]
 
             d, m, y = date.split(".")
 
             datePicker = self.editDView["date_picker"]
-            datePicker.date = datetime(y, m, d)
+            datePicker.date = datetime(int(y), int(m), int(d))
         else:
             pass
         self.navView.push_view(self.editDView)
@@ -122,7 +125,7 @@ class GUI:
         else:
             days.append(str_date)
         noticesTextView = self.editDView["notices_textview"]
-        self.activeFood["test_data"]["notices"][str_date] = noticesTextView.text
+        self.activeFood["test_data"]["notes"][str_date] = noticesTextView.text
         self.foodData.save()
         self.updateInfo()
         self.navView.pop_view(True)
@@ -157,8 +160,6 @@ class GUI:
         prop = self.foodData.getPropertiesByData(fdata)
         text = self.propView["prop_text_view"]
         text.text = prop
-        text = self.daySView["info_text_view"]
-        text.text = self.foodData.getInfo()
 
         self.navView.push_view(self.propView)
 
