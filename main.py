@@ -2,7 +2,7 @@ from backend import DataLoader, FoodTableDataSource, WidgetConfigurator, Utiliti
 import ui
 from console import hud_alert, alert
 from datetime import datetime
-
+from threading import Thread
 
 class GUI:
     GUI_INS = None
@@ -141,30 +141,34 @@ class GUI:
         self.navView.pop_view(True)
 
     def onOK(self, e):
-        out = alert("Warning", "Bist du sicher, dass du den Test mit 'OK' beenden moechtest?", "Ok", "Cancel")
-        if out == 2: return
-        if len(self.activeFood["test_data"]["test_days"]) < 3:
-            out = alert("Warning", "Achtung! Es wurden nich alle Tage eingetragen.\nBist du Sicher?", "Ok", "Cancel")
+        def inner():
+            out = alert("Warning", "Bist du sicher, dass du den Test mit 'OK' beenden moechtest?", "Ok", "Cancel")
             if out == 2: return
-        self.activeFood["test_data"]["tested"] = True
-        self.activeFood["test_data"]["result"] = True
-        self.foodData.setFoodActive(None)
-        self.activeFood = None
-        self.foodData.save()
-        self.updateInfo()
+            if len(self.activeFood["test_data"]["test_days"]) < 3:
+                out = alert("Warning", "Achtung! Es wurden nicht alle Tage eingetragen.\nBist du Sicher?", "Ok", "Cancel")
+                if out == 2: return
+            self.activeFood["test_data"]["tested"] = True
+            self.activeFood["test_data"]["result"] = True
+            self.foodData.setFoodActive(None)
+            self.activeFood = None
+            self.foodData.save()
+            self.updateInfo()
+        Thread(target=inner).start()
 
     def onNOK(self, e):
-        out = alert("Warning", "Bist du sicher, dass du den Test mit 'NICHT OK' beenden moechtest?", "Ok", "Cancel")
-        if out == 2: return
-        if len(self.activeFood["test_data"]["test_days"]) < 3:
-            out = alert("Warning", "Achtung! Es wurden nich alle Tage eingetragen.\nBist du Sicher?", "Ok", "Cancel")
+        def inner():
+            out = alert("Warning", "Bist du sicher, dass du den Test mit 'NICHT OK' beenden moechtest?", "Ok", "Cancel")
             if out == 2: return
-        self.activeFood["test_data"]["tested"] = True
-        self.activeFood["test_data"]["result"] = False
-        self.foodData.setFoodActive(None)
-        self.activeFood = None
-        self.foodData.save()
-        self.updateInfo()
+            if len(self.activeFood["test_data"]["test_days"]) < 3:
+                out = alert("Warning", "Achtung! Es wurden nicht alle Tage eingetragen.\nBist du Sicher?", "Ok", "Cancel")
+                if out == 2: return
+            self.activeFood["test_data"]["tested"] = True
+            self.activeFood["test_data"]["result"] = False
+            self.foodData.setFoodActive(None)
+            self.activeFood = None
+            self.foodData.save()
+            self.updateInfo()
+        Thread(target=inner).start()
 
     def onSearch(self, w):
         self.searchWord = w.text
