@@ -63,28 +63,26 @@ class DataLoader:
             test = food["test_data"]
             if not test["test_level"]:
                 return "\n".join([
-                    f'== Food Data ==',
+                    f'== Lebensmittel Daten ==',
                     f'Name: {food["name"]}',
                     f'Normale Portion: {food["nor_portion"]}',
                     f'Kleine Portion: {food["small_portion"]}',
                     f'Kohlenhydrahte: {food["chds"]}',
                     f'',
-                    f'== Test Data ==',
+                    f'== Test Daten ==',
                     f'Keine Testdaten vorhanden!',
-                    f'Tested: {test["tested"]}'
-                    f'Result: {test["result"]}'
                 ])
             return "\n".join([
-                f'== Food Data ==',
+                f'== Lebensmittel Daten ==',
                 f'Name: {food["name"]}',
                 f'Normale Portion: {food["nor_portion"]}',
                 f'Kleine Portion: {food["small_portion"]}',
                 f'Kohlenhydrahte: {food["chds"]}',
                 f'',
-                f'== Test Data ==',
-                f'Test Abgeschlossen: {test["tested"]}'
-                f'Test Abgeschlossen am: {test["test_days"][-1] if len(test["test_days"]) > 0 and test["test_level"] >= 3 else "-"}'
-                f'Test Ergebniss: {test["result"]}'
+                f'== Test Daten ==',
+                f'Test Abgeschlossen: {test["tested"]}',
+                f'Test Abgeschlossen am: {test["test_days"][-1] if len(test["test_days"]) > 0 and test["test_level"] >= 3 else "-"}',
+                f'Test Ergebniss: {test["result"]}',
                 f'',
                 f'== Notizen ==',
                 self.getNotices(food)
@@ -123,7 +121,13 @@ class DataLoader:
     def save(self):
         self.js.save()
 
-
+class Utilities:
+    @staticmethod
+    def search(_list, word):
+        out = []
+        for food in _list:
+            if word.lower() in food["name"].lower(): out.append(food)
+        return out
 
 class WidgetConfigurator:
     @staticmethod
@@ -147,3 +151,19 @@ class FoodTableDataSource:
         cell = ui.TableViewCell()
         cell.text_label.text = self.food[row]["name"]
         return cell
+
+class TextViewDelegate:
+    def __init__(self, hook):
+        self.hook = hook
+    def textview_should_begin_editing(self, textview):
+        return True
+    def textview_did_begin_editing(self, textview):
+        pass
+    def textview_did_end_editing(self, textview):
+        pass
+    def textview_should_change(self, textview, range, replacement):
+        return True
+    def textview_did_change(self, textview):
+        self.hook(textview)
+    def textview_did_change_selection(self, textview):
+        pass
