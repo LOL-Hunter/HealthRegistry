@@ -14,7 +14,7 @@ class GUI:
         self.searchWord = ""
         self.selectedDay = 0
         self.foodData = DataLoader()
-        self.activeFood =  self.foodData.getActiveFood()
+        self.activeFood = self.foodData.getActiveFood()
         self.loadView()
         self.fillListbox(self.foodData.getFoods())
         self.updateInfo()
@@ -153,6 +153,7 @@ class GUI:
             self.activeFood = None
             self.foodData.save()
             self.updateInfo()
+            self.navView.pop_view(True)
         Thread(target=inner).start()
 
     def onNOK(self, e):
@@ -168,6 +169,7 @@ class GUI:
             self.activeFood = None
             self.foodData.save()
             self.updateInfo()
+            self.navView.pop_view(True)
         Thread(target=inner).start()
 
     def onSearch(self, w):
