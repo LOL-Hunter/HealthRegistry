@@ -59,6 +59,12 @@ class GUI:
         save_day = self.editDView["save_button"]
         save_day.action = self.onSaveDay
 
+        ok_button = self.daySView["ok_button"]
+        ok_button.action = self.onOK
+
+        nok_button = self.daySView["nok_button"]
+        nok_button.action = self.onNOK
+
 
     def clearSearch(self, e):
         search_field = self.mainView["search_field"]
@@ -99,18 +105,20 @@ class GUI:
         if not len(days) >= dayIndex:
             hud_alert("Bitte erst die voherigen Tage eintragen!")
             return
+        noticesTextView = self.editDView["notices_textview"]
+        datePicker = self.editDView["date_picker"]
         if len(days) >= dayIndex+1: # day already exixts -> not create new on
             date = days[dayIndex]
             notices = self.activeFood["test_data"]["notes"]
-            noticesTextView = self.editDView["notices_textview"]
             noticesTextView.text = notices[date]
 
             d, m, y = date.split(".")
 
-            datePicker = self.editDView["date_picker"]
             datePicker.date = datetime(int(y), int(m), int(d))
         else:
-            pass
+            noticesTextView.text = ""
+            datePicker.date = datetime.today()
+        self.navView.navigation_bar_hidden = True
         self.navView.push_view(self.editDView)
 
     def onSaveDay(self, e):
@@ -128,12 +136,16 @@ class GUI:
         self.activeFood["test_data"]["notes"][str_date] = noticesTextView.text
         self.foodData.save()
         self.updateInfo()
+        self.navView.navigation_bar_hidden = False
         self.navView.pop_view(True)
         self.navView.pop_view(True)
 
     def onOK(self, e):
         out = alert("Warning", "Bist du sicher, dass du den Test mit 'OK' beenden moechtest?", "Ok", "Cancel")
         if out == 2: return
+        if len(self.activeFood["test_data"]["test_days"]) < 3:
+            out = alert("Warning", "Achtung! Es wurden nich alle Tage eingetragen.\nBist du Sicher?", "Ok", "Cancel")
+            if out == 2: return
         self.activeFood["test_data"]["tested"] = True
         self.activeFood["test_data"]["result"] = True
         self.foodData.setFoodActive(None)
@@ -144,6 +156,9 @@ class GUI:
     def onNOK(self, e):
         out = alert("Warning", "Bist du sicher, dass du den Test mit 'NICHT OK' beenden moechtest?", "Ok", "Cancel")
         if out == 2: return
+        if len(self.activeFood["test_data"]["test_days"]) < 3:
+            out = alert("Warning", "Achtung! Es wurden nich alle Tage eingetragen.\nBist du Sicher?", "Ok", "Cancel")
+            if out == 2: return
         self.activeFood["test_data"]["tested"] = True
         self.activeFood["test_data"]["result"] = False
         self.foodData.setFoodActive(None)
