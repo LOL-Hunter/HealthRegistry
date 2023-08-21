@@ -81,7 +81,7 @@ class DataLoader:
                 f'',
                 f'== Test Daten ==',
                 f'Test Abgeschlossen: {test["tested"]}',
-                f'Test Abgeschlossen am: {test["test_days"][-1] if len(test["test_days"]) > 0 else "-"}',
+                f'Test Abgeschlossen am: {test["test_days"][-1] if len(test["test_days"]) >= 3 else "-"}',
                 f'Test Ergebniss: {test["result"]}',
                 f'',
                 f'== Notizen ==',
@@ -164,11 +164,11 @@ class DayTableDataSource:
         days = self.food["test_data"]["test_days"]
         length = len(days)
         if length >= row+1:
-            info = f'{days[row]}'
+            info = f'[{days[row]}]'
         else:
             info = "Nicht eingetragen!"
         cell = ui.TableViewCell()
-        cell.text_label.text = f'Day {row+1} '+info
+        cell.text_label.text = f'Day {row+1}   '+info
         return cell
 
 
