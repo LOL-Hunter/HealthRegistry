@@ -1,83 +1,784 @@
 {
   "active": "Weizen",
   "food":[
-    {
-        "name": "Weizen",
-        "nor_portion": "2 St.",
-        "small_portion": "1 St.",
-        "chds": [
-            "Oligos"
-        ],
-        "test_data": {
-            "tested": false,
-            "test_days": ["21.08.2023", "22.08.2023", "23.08.2023"],
-            "test_level": 3,
-            "result": null,
-            "notes": {"21.08.2023": "Test heute begonnen lol!\nlauft super:)\nMorgen gehts weiter!",
-            "22.08.2023": "Soooooooooooooooooooooooooooo Tag2.\nLaune super.\nSchmeckt!",
-            "23.08.2023": "Hmmmm Laune schlecht...\n Und mir auch!:("
-            }
-        }
-    },
-    {
-        "name": "Roggen",
-        "nor_portion": "2 St.",
-        "small_portion": "1 St.",
-        "chds": [
-            "Oligos"
-        ],
-        "test_data": {
-            "tested": false,
-            "test_days": [],
-            "test_level": 0,
-            "result": null,
-            "notes": {}
-        }
-    },
-    {
-        "name": "Gerste",
-        "nor_portion": "1 Tasse",
-        "small_portion": "1/2 Tasse",
-        "chds": [
-            "Oligos"
-        ],
-        "test_data": {
-            "tested": false,
-            "test_days": [],
-            "test_level": 0,
-            "result": null,
-            "notes": {}
-        }
-    },
-    {
-        "name": "Artischocke",
-        "nor_portion": "1/2 St.",
-        "small_portion": "1/4 St.",
-        "chds": [
-            "Oligos"
-        ],
-        "test_data": {
-            "tested": false,
-            "test_days": [],
-            "test_level": 0,
-            "result": null,
-            "notes": {}
-        }
-    },
-    {
-        "name": "Artischocken-Hertz",
-        "nor_portion": "1/4 St.",
-        "small_portion": "1/8 St.",
-        "chds": [
-            "Oligos"
-        ],
-        "test_data": {
-            "tested": false,
-            "test_days": [],
-            "test_level": 0,
-            "result": null,
-            "notes": {}
-        }
-    }
+      {
+			"name": "Weizen",
+			"nor_portion": "2 St.",
+			"small_portion": "1 St.",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Roggen",
+			"nor_portion": "2 St.",
+			"small_portion": "1 St.",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Gerste",
+			"nor_portion": "1 Tasse",
+			"small_portion": "1/2 Tasse",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Artischocke",
+			"nor_portion": "1/2 St.",
+			"small_portion": "1/4 St.",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Artischocken-Hertz",
+			"nor_portion": "1/4 St.",
+			"small_portion": "1/8 St.",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Blumenkohl",
+			"nor_portion": "1/2 Tasse",
+			"small_portion": "1/4 Tasse",
+			"chds": [
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Butternut-Kuerbis",
+			"nor_portion": "1/2 Tasse",
+			"small_portion": "1/4 Tasser",
+			"chds": [
+				"Oligos",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Erbsen",
+			"nor_portion": "10 St. 33 g",
+			"small_portion": "5 St. 17 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Huelsenfruechte getrocknet",
+			"nor_portion": "1/2 Tasse 91 g",
+			"small_portion": "1/2 Tasse 46",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Kefen/ Zuckerschoten",
+			"nor_portion": "10 St.",
+			"small_portion": "5 St.",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Knoblauch",
+			"nor_portion": "1 Z.",
+			"small_portion": "1/2 Z.",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Kohl",
+			"nor_portion": "1 Tasse 70 g",
+			"small_portion": "1/2 Tasse 35 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Lauch",
+			"nor_portion": "1 St. 83 g",
+			"small_portion": "1/2 St. 42 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Pilze",
+			"nor_portion": "1 T 75 g",
+			"small_portion": "1/2 T 37 g",
+			"chds": [
+				"Oligos",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Rotebeete",
+			"nor_portion": "4 Scheiben 41g",
+			"small_portion": "2 Scheiben 20 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Zwiebel",
+			"nor_portion": "45 g",
+			"small_portion": "36 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Spargel",
+			"nor_portion": "2 St 30 g",
+			"small_portion": "1 St 15 g",
+			"chds": [
+				"Fruchtose"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Suesskartoffel",
+			"nor_portion": "140 g",
+			"small_portion": "70 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Apfel",
+			"nor_portion": "165 g",
+			"small_portion": "83 g",
+			"chds": [
+				"Fruchtose",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Apfelsaft",
+			"nor_portion": "1 Glas 210 g",
+			"small_portion": "105g",
+			"chds": [
+				"Fruchtose",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Apfel getrocknet",
+			"nor_portion": "3 Ringe 19 g",
+			"small_portion": "1,5 Ringe 9 g",
+			"chds": [
+				"Fruchtose",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Aprikose",
+			"nor_portion": "2 St 112 g",
+			"small_portion": "1 St 56 g",
+			"chds": [
+				"Oligos",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Aprikose getrocknet",
+			"nor_portion": "4 St 28 g",
+			"small_portion": "2 St 14 g",
+			"chds": [
+				"Oligos",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Avocado",
+			"nor_portion": "1/2 St",
+			"small_portion": "1/4",
+			"chds": [
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Birne",
+			"nor_portion": "1 mittlere 156 g",
+			"small_portion": "1/2 75 g",
+			"chds": [
+				"Fruchtose",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Brombeeren",
+			"nor_portion": "10 St 50 g",
+			"small_portion": "5 St 25 g",
+			"chds": [
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Cranberry getrocknet",
+			"nor_portion": "2 TL 56 g",
+			"small_portion": "1 TL 27 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Dattel",
+			"nor_portion": "4 St 96 g",
+			"small_portion": "2 St 48 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+
+		{
+			"name": "Feige",
+			"nor_portion": "4 St 76 g",
+			"small_portion": "2 St 38 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Granatapfel",
+			"nor_portion": "1 kleiner 76 g",
+			"small_portion": "1/2 38 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Grapefruit",
+			"nor_portion": "1 mittlere 207 g",
+			"small_portion": "1/2 mittlere 104 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Khaki",
+			"nor_portion": "1 St 170 g",
+			"small_portion": "1/2 50 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Kirsche",
+			"nor_portion": "6 st 42 g",
+			"small_portion": "3 st 21 g",
+			"chds": [
+				"Fruchtose"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Mango",
+			"nor_portion": "1 St 207 g",
+			"small_portion": "1/2 St 103 g",
+			"chds": [
+				"Fruchtose"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Nektarine",
+			"nor_portion": "1 mittlere 150 g",
+			"small_portion": "1/2 75 g",
+			"chds": [
+				"Oligos",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "O-Saft",
+			"nor_portion": "1 Glas 210 g",
+			"small_portion": "1/2 Glas 105 g",
+			"chds": [
+				"Fruchtose"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Pfirsich",
+			"nor_portion": "1 mittlerer 145 g",
+			"small_portion": "1/2 73 g",
+			"chds": [
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Pfirsich weiss",
+			"nor_portion": "1 mittlerer 145 g",
+			"small_portion": "1/2 75 g",
+			"chds": [
+				"Oligos",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Rosinen",
+			"nor_portion": "3 TL 39 g",
+			"small_portion": "1,5 TL 19 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Wassermelone",
+			"nor_portion": "280 g",
+			"small_portion": "140 g",
+			"chds": [
+				"Fruchtose",
+				"Oligos",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Pflaume",
+			"nor_portion": "1 St\u00fcck 66 g",
+			"small_portion": "1/2 St 33 g",
+			"chds": [
+				"Oligos",
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Fruchtzucker",
+			"nor_portion": "1 TL 13 g",
+			"small_portion": "1/2 TL 6 g",
+			"chds": [
+				"Fruchtose"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Honig",
+			"nor_portion": "2 TL 56 g",
+			"small_portion": "1 TL 33 g",
+			"chds": [
+				"Fruchtose"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Sorbit/Xylit/Mannit etc",
+			"nor_portion": "",
+			"small_portion": "",
+			"chds": [
+				"Polyole"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Pistazien",
+			"nor_portion": "30 St 23 g",
+			"small_portion": "15 St 11 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Cashew",
+			"nor_portion": "20 St 30 g",
+			"small_portion": "10 St 15 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Mandeln",
+			"nor_portion": "20 St 24 g",
+			"small_portion": "10 St 12 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Haselnuesse",
+			"nor_portion": "20 St 30 g",
+			"small_portion": "10 St 15 g",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Kokosraspel",
+			"nor_portion": "1/2 Tasse 37 g",
+			"small_portion": "1/4 Tasse 18",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Kamillentee",
+			"nor_portion": "250 ml",
+			"small_portion": "125 ml",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		},
+		{
+			"name": "Fencheltee",
+			"nor_portion": "250 ml",
+			"small_portion": "180 ml",
+			"chds": [
+				"Oligos"
+			],
+			"test_data": {
+				"tested": false,
+				"test_days": [],
+				"test_level": 0,
+				"result": null,
+				"notes": {}
+			}
+		}
   ]
 }
