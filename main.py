@@ -1,4 +1,4 @@
-from backend import DataLoader, FoodTableDataSource, WidgetConfigurator, Utilities, TextViewDelegate
+from backend import DataLoader, FoodTableDataSource, WidgetConfigurator, Utilities, TextViewDelegate, DayTableDataSource
 import ui
 from console import hud_alert
 class GUI:
@@ -8,6 +8,7 @@ class GUI:
         self.selectedMode = "All"
         self.selectedFood = None
         self.searchWord = ""
+        self.selectedDay = 0
         self.foodData = DataLoader()
         self.loadView()
         self.fillListbox(self.foodData.getFoods())
@@ -19,6 +20,7 @@ class GUI:
         self.mainView = ui.load_view("main")
         self.propView = ui.load_view("prop")
         self.daySView = ui.load_view("day_select")
+        self.editDView = ui.load_view("edit_day")
 
         self.navView = ui.NavigationView(self.mainView)
         self.navView.width = 600
@@ -46,8 +48,9 @@ class GUI:
         show_act_test = self.mainView["show_active_test_button"]
         show_act_test.action = self.showActiveTest
 
-        start_test = self.mainView["start_button"]
+        start_test = self.propView["start_button"]
         start_test.action = self.startTest
+
 
     def clearSearch(self, e):
         search_field = self.mainView["search_field"]
@@ -58,18 +61,31 @@ class GUI:
         if self.foodData.getActiveFood() is None:
             hud_alert("Kein Test Aktiv!")
             return
+        day_list = self.daySView["days_tableview"]
+        dataSource = DayTableDataSource(self, self.foodData.getActiveFood())
+        day_list.data_source = dataSource
+        day_list.delegate = dataSource
+        day_list.reload_data()
         self.navView.push_view(self.daySView)
 
     def startTest(self, e):
         if self.foodData.getActiveFood() is not None:
             hud_alert("Anderer Test noch aktiv!")
             return
+        if self.selectedFood["test_data"]["tested"]:
+            hud_alert("Lebensmittel bereits getestet!")
+            return
         self.foodData.setFoodActive(self.selectedFood["name"])
         self.foodData.save()
         hud_alert(f"Nahrungsmittel '{self.selectedFood['name']}' gestartet!")
         self.navView.pop_view(True)
 
+    def onDayBoxSelect(self, dayIndex):
+        self.selectedDay = dayIndex
+        
 
+
+        self.navView.push_view(self.editDView)
 
     def onSearch(self, w):
         self.searchWord = w.text
