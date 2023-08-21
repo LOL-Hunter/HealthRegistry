@@ -105,7 +105,7 @@ class DataLoader:
     def getInfo(self):
         tested = 0
         untested = 0
-        active = self.getActiveFood()["name"] if self.getActiveFood() is not None else "Kein Nahrungsmittel activ!"
+        active = self.getActiveFood()["name"] if self.getActiveFood() is not None else "Kein Nahrungsmittel aktiv!"
         length = len(self.getFoods())
         for food in self.getFoods():
             testData = food["test_data"]
