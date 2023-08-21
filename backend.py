@@ -40,14 +40,17 @@ class DataLoader:
         }
     def getProperties(self, name):
         food = self.getFoodByName(name)
+        return self.getPropertiesByData(food)
+
+    def getPropertiesByData(self, food):
         if food is not None:
             test = food["test_data"]
             return f'Name:{food["name"]}\nTested: {test["tested"]}\nResult: {test["result"]}'
         return ""
 
-
     def save(self):
         self.js.save()
+
 
 
 class WidgetConfigurator:
@@ -57,12 +60,17 @@ class WidgetConfigurator:
         tv.selectable = False
 
 class FoodTableDataSource:
-    def __init__(self, food):
+    def __init__(self, _ins, food):
+        self.ins = _ins
         self.food = food
     def tableview_number_of_sections(self, tableview):
         return 1
     def tableview_number_of_rows(self, tableview, section):
         return len(self.food)
+
+    def tableview_did_select(self, tableview, section, row):
+        print(tableview, section, row)
+        self.ins.onListBoxSelect(section)
 
     def tableview_cell_for_row(self, tableview, section, row):
         cell = ui.TableViewCell()
